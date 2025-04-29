@@ -14,7 +14,7 @@ def read_root():
 
 @app.get("/frame")
 def get_frame():
-    response = request.get(cam_url)
+    response = requests.get(cam_url)
     if response.status_code == 200:
         img_array = np.asarray(bytearray(response.content), dtype = np.unit8)
         frame = cv2.imdecode(img_array, -1)
