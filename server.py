@@ -4,9 +4,13 @@ import numpy as np
 from fastapi import FastAPI
 from io import BytesIO
 from starlette.responses import StreamingResponse
+from pydantic import BaseModel
 
 app = FastAPI()
 
+class Data(BaseModel):
+    msg: str
+    
 # Your ESP32-CAM snapshot URL
 cam_url = "http://10.18.114.67/capture"
 
@@ -28,3 +32,9 @@ def get_frame():
         return StreamingResponse(BytesIO(img_encoded.tobytes()), media_type="image/jpeg")
     
     return {"error": "Couldn't Fetch Frame"}
+
+@app.post("/esp32Controller")
+def revcive_msg(data:Data):
+    print(f"Received from ESP32: {message.msg}")
+    return {"status": "success", "received": message.msg}
+    
