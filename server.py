@@ -43,6 +43,6 @@ def revcive_msg(data:Data1):
 
 @app.post("/test")
 def revcive_msg(data:Data2):
-    print(f"Received : {data.msg}")
-    return {"status": "success", "received": data.msg}
+    print(f"Received : {data}")
+    return {"status": "success", "received": data}
     
