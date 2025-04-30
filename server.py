@@ -11,7 +11,7 @@ from pydantic import BaseModel
 from PIL import Image
 
 app = FastAPI()
-
+IMAGE_PATH = "latest.jpg"
 class Data1(BaseModel):
     msg: str
 
