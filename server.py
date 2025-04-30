@@ -1,7 +1,8 @@
 import requests
 import cv2
 import numpy as np
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
+from fastapi.responses import JSONResponse
 from io import BytesIO
 from starlette.responses import StreamingResponse
 from pydantic import BaseModel
