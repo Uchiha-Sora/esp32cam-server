@@ -10,6 +10,8 @@ from starlette.responses import StreamingResponse
 from pydantic import BaseModel
 from PIL import Image
 
+import os
+
 app = FastAPI()
 IMAGE_PATH = "latest.jpg"
 class Data1(BaseModel):
