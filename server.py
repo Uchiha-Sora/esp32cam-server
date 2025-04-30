@@ -53,8 +53,11 @@ def revcive_msg(data:Data2):
 async def receive_image(file: UploadFile = File(...)):
     contents = await file.read()
     image = Image.open(BytesIO(contents))
-    print("Received image size:", image.size)
-    return JSONResponse(content={"status": "Image received", "filename": file.filename})
+    # Save the image to a known location
+    image_path = '/tmp/received.jpg'
+    image.save(image_path)
+    print(f"Image saved at {image_path}")
+
 
 @app.get("/view_image")
 def view_image():
