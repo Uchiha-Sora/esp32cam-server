@@ -8,8 +8,11 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-class Data(BaseModel):
+class Data1(BaseModel):
     msg: str
+
+class Data2(BaseModel):
+    temperature: float
     
 # Your ESP32-CAM snapshot URL
 cam_url = "http://10.18.114.67/capture"
@@ -34,7 +37,12 @@ def get_frame():
     return {"error": "Couldn't Fetch Frame"}
 
 @app.post("/esp32Controller")
-def revcive_msg(data:Data):
-    print(f"Received from ESP32: {message.msg}")
-    return {"status": "success", "received": message.msg}
+def revcive_msg(data:Data1):
+    print(f"Received from ESP32: {data.msg}")
+    return {"status": "success", "received": data.msg}
+
+@app.post("/test")
+def revcive_msg(data:Data2):
+    print(f"Received : {data.msg}")
+    return {"status": "success", "received": data.msg}
     
