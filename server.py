@@ -60,11 +60,15 @@ async def receive_image(file: UploadFile = File(...)):
     print(f"Image saved at {image_path}")
     return JSONResponse(content={"status": "Image received", "filename": file.filename})
 
-@app.get("/view_image")
-def view_image():
-    return FileResponse("/tmp/received.jpg", media_type="image/jpeg")
-
 @app.post("/livecam")
 async def receive_image(file: UploadFile = File(...)):
     contents = await file.read()
-    return StreamingResponse(BytesIO(contents), media_type="image/jpeg")
+    with open(IMAGE_PATH, "wb") as f:
+        f.write(contents)
+    return JSONResponse(content={"status": "received"})
+
+@app.get("/latest.jpg")
+async def get_latest_image():
+    if os.path.exists(IMAGE_PATH):
+        return FileResponse(IMAGE_PATH, media_type="image/jpeg")
+    return JSONResponse(content={"error": "No image yet"}, status_code=404)
