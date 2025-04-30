@@ -51,6 +51,6 @@ def revcive_msg(data:Data2):
 @app.post("/send_data")
 async def receive_image(file: UploadFile = File(...)):
     contents = await file.read()
-    image = Image.open(io.BytesIO(contents))
+    image = Image.open(BytesIO(contents))
     print("Received image size:", image.size)
     return JSONResponse(content={"status": "Image received", "filename": file.filename})
