@@ -54,3 +54,7 @@ async def receive_image(file: UploadFile = File(...)):
     image = Image.open(BytesIO(contents))
     print("Received image size:", image.size)
     return JSONResponse(content={"status": "Image received", "filename": file.filename})
+
+@app.get("/view_image")
+def view_image():
+    return FileResponse("/tmp/received.jpg", media_type="image/jpeg")
