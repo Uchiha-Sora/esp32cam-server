@@ -4,6 +4,7 @@ import numpy as np
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
 from fastapi.responses import FileResponse
+
 from io import BytesIO
 from starlette.responses import StreamingResponse
 from pydantic import BaseModel
@@ -57,7 +58,7 @@ async def receive_image(file: UploadFile = File(...)):
     image_path = '/tmp/received.jpg'
     image.save(image_path)
     print(f"Image saved at {image_path}")
-
+    return JSONResponse(content={"status": "Image received", "filename": file.filename})
 
 @app.get("/view_image")
 def view_image():
