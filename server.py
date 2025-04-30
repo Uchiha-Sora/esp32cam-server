@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from io import BytesIO
 from starlette.responses import StreamingResponse
 from pydantic import BaseModel
+from PIL import Image
 
 app = FastAPI()
 
