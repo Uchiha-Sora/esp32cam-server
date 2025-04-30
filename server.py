@@ -63,3 +63,8 @@ async def receive_image(file: UploadFile = File(...)):
 @app.get("/view_image")
 def view_image():
     return FileResponse("/tmp/received.jpg", media_type="image/jpeg")
+
+@app.post("/livecam")
+async def receive_image(file: UploadFile = File(...)):
+    contents = await file.read()
+    return StreamingResponse(BytesIO(contents), media_type="image/jpeg")
